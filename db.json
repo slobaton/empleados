@@ -1,0 +1,104 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "fullname": "Rocio Contreras",
+      "department": "produccion",
+      "vehicle": {
+        "type": "automovil",
+        "licensePlate": "235XTD",
+        "color": "blanco"
+      }
+    },
+    {
+      "id": 2,
+      "fullname": "Vianca Contreras",
+      "department": "produccion",
+      "vehicle": {
+        "type": "automovil",
+        "licensePlate": "336HJK",
+        "color": "rojo"
+      }
+    },
+    {
+      "id": 3,
+      "fullname": "Pamela Rocha",
+      "department": "finanzas",
+      "vehicle": {
+        "type": "moto",
+        "licensePlate": "857DED",
+        "color": "plateado"
+      }
+    },
+    {
+      "id": 4,
+      "fullname": "Jose Milca",
+      "department": "contabilidad",
+      "vehicle": {
+        "type": "automovil",
+        "licensePlate": "235XXC",
+        "color": "negro"
+      }
+    },
+    {
+      "id": 5,
+      "fullname": "Juan Zapana",
+      "department": "finanzas",
+      "vehicle": {
+        "type": "moto",
+        "licensePlate": "1254XTD",
+        "color": "blanco"
+      }
+    },
+    {
+      "vehicle": {
+        "type": "moto",
+        "licensePlate": "JDJD45",
+        "color": "rojo"
+      },
+      "fullname": "SERGIO LOBATON",
+      "department": "produccion",
+      "id": 6
+    },
+    {
+      "vehicle": {
+        "type": "automovil",
+        "color": "rojo",
+        "licensePlate": "77dd"
+      },
+      "fullname": "Cristian Montecinos",
+      "department": "contabilidad",
+      "id": 7
+    },
+    {
+      "vehicle": {
+        "type": "moto",
+        "licensePlate": "345JCC",
+        "color": "azul"
+      },
+      "fullname": "julio guarachi",
+      "department": "finanzas",
+      "id": 8
+    },
+    {
+      "vehicle": {
+        "type": "automovil",
+        "color": "NEGRO"
+      },
+      "fullname": "JUAN ZAPATA",
+      "department": "produccion",
+      "licensePlate": "JZT33",
+      "id": 9
+    },
+    {
+      "vehicle": {
+        "type": "automovil",
+        "licensePlate": "KRN36",
+        "color": "ROJO"
+      },
+      "fullname": "KAREN LOZA",
+      "department": "finanzas",
+      "id": 10
+    }
+  ]
+}
