@@ -13,11 +13,33 @@
     <b-row class="mt-3">
       <b-card>
         <b-row align-h="between">
-          <b-col cols="6">
+          <b-col cols="12">
             <h3>{{ tableHeader }}</h3>
           </b-col>
-          <b-col cols="2">
+          <b-col cols="12">
             <b-row>
+              <b-col>
+                <b-form-input
+                  v-model="searchText"
+                  placeholder="Buscar por nombre de empleado"
+                ></b-form-input>
+              </b-col>
+              <b-col>
+                <b-button
+                  variant="dark"
+                  id="show-btn"
+                  @click="clearFilter"
+                >
+                  <b-icon-x class="text-white"></b-icon-x>
+                </b-button>
+                <b-button
+                  variant="secondary"
+                  id="show-btn"
+                  @click="filterByName"
+                >
+                  <b-icon-search class="text-white"></b-icon-search>
+                </b-button>
+              </b-col>
               <b-col>
                 <b-button
                   variant="primary"
@@ -95,7 +117,7 @@
       ref="delete-employee-modal"
       size="md"
       hide-footer
-      title="Confirm Deletion"
+      title="Confirmación de eliminación"
     >
       <delete-employee-modal
         @closeDeleteModal="closeDeleteModal"
@@ -153,6 +175,7 @@ export default {
       tableHeader: "",
       showSuccessAlert: false,
       alertMessage: "",
+      searchText: ""
     };
   },
   mounted() {
@@ -203,6 +226,18 @@ export default {
       this.showSuccessAlert = true;
       this.alertMessage = "El empleado fue eliminado exitosamente!";
     },
+    filterByName() {
+      const filterEmployees = this.items.filter(
+        item => item.fullname.toLowerCase().includes(this.searchText.toLowerCase())
+      );
+
+      console.log(filterEmployees);
+      this.items = filterEmployees;
+    },
+    clearFilter() {
+      this.getEmployeeData();
+      this.searchText = ""
+    }
   },
 };
 </script>
