@@ -100,12 +100,13 @@
       hide-footer
       title="Confirm Deletion"
     >
-      <delete-customer-modal
+      <delete-employee-modal
         @closeDeleteModal="closeDeleteModal"
         @reloadDataTable="getCustomerData"
         @showDeleteAlert="showDeleteSuccessModal"
         :employeeId="employeeId"
-      ></delete-customer-modal>
+      >
+      </delete-employee-modal>
     </b-modal>
   </div>
 </template>
@@ -115,14 +116,14 @@ import axios from "axios";
 import CustomerOverview from "@/components/CustomerOverview.vue";
 import CreateEmployeeForm from "@/components/CreateEmployeeForm.vue";
 import EditEmployeeForm from "@/components/EditEmployeeForm.vue";
-import DeleteCustomerModal from "@/components/DeleteCustomerModal.vue";
+import DeleteEmployeeModal from "@/components/DeleteEmployeeModal.vue";
 
 export default {
   components: {
     CustomerOverview,
     CreateEmployeeForm,
     EditEmployeeForm,
-    DeleteCustomerModal,
+    DeleteEmployeeModal,
   },
   data() {
     return {
@@ -203,11 +204,11 @@ export default {
     },
     showAlertCreate() {
       this.showSuccessAlert = true;
-      this.alertMessage = "Customer was created successfully!";
+      this.alertMessage = "El empleado fue creado con éxito!";
     },
     showAlertUpdate() {
       this.showSuccessAlert = true;
-      this.alertMessage = "Customer was updated successfully";
+      this.alertMessage = "El empleado fue actualizado con éxito";
     },
     showDeleteModal(id) {
       this.$refs["delete-customer-modal"].show();
@@ -218,7 +219,7 @@ export default {
     },
     showDeleteSuccessModal() {
       this.showSuccessAlert = true;
-      this.alertMessage = "Customer was deleted successfully!";
+      this.alertMessage = "El empleado fue eliminado exitosamente!";
     },
   },
 };

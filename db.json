@@ -89,36 +89,6 @@
       "fullname": "JUAN ZAPATA",
       "department": "produccion",
       "id": 9
-    },
-    {
-      "vehicle": {
-        "type": "automovil",
-        "licensePlate": "KRN36",
-        "color": "ROJO"
-      },
-      "fullname": "KAREN LOZA",
-      "department": "finanzas",
-      "id": 10
-    },
-    {
-      "vehicle": {
-        "type": "moto",
-        "licensePlate": "WCE300",
-        "color": "ROJO"
-      },
-      "fullname": "WENDY CLAROS",
-      "department": "finanzas",
-      "id": 11
-    },
-    {
-      "vehicle": {
-        "type": "automovil",
-        "licensePlate": "LCL2145",
-        "color": "VERDE"
-      },
-      "fullname": "LENY CONTRERAS COCHINA",
-      "department": "finanzas",
-      "id": 12
     }
   ]
 }
