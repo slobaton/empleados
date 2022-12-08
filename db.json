@@ -89,6 +89,16 @@
       "fullname": "JUAN ZAPATA",
       "department": "produccion",
       "id": 9
+    },
+    {
+      "vehicle": {
+        "type": "automovil",
+        "licensePlate": "LCL2145",
+        "color": "ROJO"
+      },
+      "fullname": "Alex Nicolas Mendizabal Arriaza",
+      "department": "finanzas",
+      "id": 10
     }
   ]
 }

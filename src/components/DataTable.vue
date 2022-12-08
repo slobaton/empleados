@@ -6,12 +6,9 @@
       </b-alert>
     </b-row>
     <b-row>
-      <customer-overview
-        :totalCustomers="numberOfCustomers"
-        :activeCustomers="activeCustomers"
-        @totalCustomersIsActive="setFilterTotalIsActive"
-        @activeCustomerIsActive="setFilterActiveIsActive"
-      ></customer-overview>
+      <employee-overview
+        :totalEmployees="numberOfEmployees"
+      ></employee-overview>
     </b-row>
     <b-row class="mt-3">
       <b-card>
@@ -66,28 +63,28 @@
     </b-row>
 
     <b-modal
-      ref="create-customer-modal"
+      ref="create-employee-modal"
       size="xl"
       hide-footer
       title="Registro de nuevo empleado"
     >
       <create-employee-form
         @closeCreateModal="closeCreateModal"
-        @reloadDataTable="getCustomerData"
+        @reloadDataTable="getEmployeeData"
         @showSuccessAlert="showAlertCreate"
       ></create-employee-form>
     </b-modal>
 
     <!-- UPDATE -->
     <b-modal
-      ref="edit-customer-modal"
+      ref="edit-employee-modal"
       size="xl"
       hide-footer
       title="Actualizar empleado"
     >
       <edit-employee-form
         @closeEditModal="closeEditModal"
-        @reloadDataTable="getCustomerData"
+        @reloadDataTable="getEmployeeData"
         @showSuccessAlert="showAlertUpdate"
         :employeeId="employeeId"
       ></edit-employee-form>
@@ -95,14 +92,14 @@
 
     <!-- DELETE -->
     <b-modal
-      ref="delete-customer-modal"
+      ref="delete-employee-modal"
       size="md"
       hide-footer
       title="Confirm Deletion"
     >
       <delete-employee-modal
         @closeDeleteModal="closeDeleteModal"
-        @reloadDataTable="getCustomerData"
+        @reloadDataTable="getEmployeeData"
         @showDeleteAlert="showDeleteSuccessModal"
         :employeeId="employeeId"
       >
@@ -113,14 +110,14 @@
 
 <script>
 import axios from "axios";
-import CustomerOverview from "@/components/CustomerOverview.vue";
+import EmployeeOverview from "@/components/EmployeeOverview.vue";
 import CreateEmployeeForm from "@/components/CreateEmployeeForm.vue";
 import EditEmployeeForm from "@/components/EditEmployeeForm.vue";
 import DeleteEmployeeModal from "@/components/DeleteEmployeeModal.vue";
 
 export default {
   components: {
-    CustomerOverview,
+    EmployeeOverview,
     CreateEmployeeForm,
     EditEmployeeForm,
     DeleteEmployeeModal,
@@ -151,56 +148,41 @@ export default {
         "acciones",
       ],
       items: [],
-      numberOfCustomers: 0,
-      activeCustomers: 0,
-      activeCustomersData: [],
+      numberOfEmployees: 0,
       employeeId: 0,
-      companySearchTerm: "",
       tableHeader: "",
       showSuccessAlert: false,
       alertMessage: "",
     };
   },
   mounted() {
-    this.getCustomerData();
+    this.getEmployeeData();
   },
   methods: {
     showCreateModal() {
-      this.$refs["create-customer-modal"].show();
+      this.$refs["create-employee-modal"].show();
     },
     closeCreateModal() {
-      this.$refs["create-customer-modal"].hide();
+      this.$refs["create-employee-modal"].hide();
     },
-    getCustomerData() {
+    getEmployeeData() {
       axios
         .get("http://localhost:3000/employees/")
         .then((response) => {
           this.tableHeader = "Empleados de la empresa";
           this.items = response.data;
-          this.numberOfCustomers = response.data.length;
-          this.activeCustomersData = response.data.filter(
-            (item) => item.customer_status === "active"
-          );
-          this.activeCustomers = this.activeCustomersData.length;
+          this.numberOfEmployees = response.data.length;
         })
         .catch((error) => {
           console.log(error);
         });
     },
     getRowData(id) {
-      this.$refs["edit-customer-modal"].show();
+      this.$refs["edit-employee-modal"].show();
       this.employeeId = id;
     },
     closeEditModal() {
-      this.$refs["edit-customer-modal"].hide();
-    },
-    setFilterTotalIsActive() {
-      this.tableHeader = "Total Customers";
-      this.getCustomerData();
-    },
-    setFilterActiveIsActive() {
-      this.tableHeader = "Active Customers";
-      this.items = this.activeCustomersData;
+      this.$refs["edit-employee-modal"].hide();
     },
     showAlertCreate() {
       this.showSuccessAlert = true;
@@ -211,11 +193,11 @@ export default {
       this.alertMessage = "El empleado fue actualizado con éxito";
     },
     showDeleteModal(id) {
-      this.$refs["delete-customer-modal"].show();
+      this.$refs["delete-employee-modal"].show();
       this.employeeId = id;
     },
     closeDeleteModal() {
-      this.$refs["delete-customer-modal"].hide();
+      this.$refs["delete-employee-modal"].hide();
     },
     showDeleteSuccessModal() {
       this.showSuccessAlert = true;
