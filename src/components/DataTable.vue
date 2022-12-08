@@ -42,22 +42,7 @@
             :fields="fields"
             class="text-center"
           >
-            <template #cell(contact_name)="data">
-              {{
-                `${data.item.contact_firstname} ${data.item.contact_lastname}`
-              }}
-            </template>
-            <template #cell(customer_status)="data">
-              <b-icon-bookmark-check-fill
-                variant="success"
-                v-if="data.item.customer_status === 'active'"
-              ></b-icon-bookmark-check-fill>
-              <b-icon-bookmark-x-fill
-                variant="danger"
-                v-else
-              ></b-icon-bookmark-x-fill>
-            </template>
-            <template #cell(actions)="data">
+            <template #cell(acciones)="data">
               <b-row>
                 <b-col cols="7">
                   <b-icon-pencil-square
@@ -86,29 +71,29 @@
       hide-footer
       title="Registro de nuevo empleado"
     >
-      <create-customer-form
+      <create-employee-form
         @closeCreateModal="closeCreateModal"
         @reloadDataTable="getCustomerData"
         @showSuccessAlert="showAlertCreate"
-      ></create-customer-form>
+      ></create-employee-form>
     </b-modal>
 
-    <!-- Modal for updating customers -->
+    <!-- UPDATE -->
     <b-modal
       ref="edit-customer-modal"
       size="xl"
       hide-footer
-      title="Edit Customer"
+      title="Actualizar empleado"
     >
-      <edit-customer-form
+      <edit-employee-form
         @closeEditModal="closeEditModal"
         @reloadDataTable="getCustomerData"
         @showSuccessAlert="showAlertUpdate"
-        :customerId="customerId"
-      ></edit-customer-form>
+        :employeeId="employeeId"
+      ></edit-employee-form>
     </b-modal>
 
-    <!-- Delete Customer Modal -->
+    <!-- DELETE -->
     <b-modal
       ref="delete-customer-modal"
       size="md"
@@ -119,7 +104,7 @@
         @closeDeleteModal="closeDeleteModal"
         @reloadDataTable="getCustomerData"
         @showDeleteAlert="showDeleteSuccessModal"
-        :customerId="customerId"
+        :employeeId="employeeId"
       ></delete-customer-modal>
     </b-modal>
   </div>
@@ -128,15 +113,15 @@
 <script>
 import axios from "axios";
 import CustomerOverview from "@/components/CustomerOverview.vue";
-import CreateCustomerForm from "@/components/CreateEmployeeForm.vue";
-import EditCustomerForm from "@/components/EditCustomerForm.vue";
+import CreateEmployeeForm from "@/components/CreateEmployeeForm.vue";
+import EditEmployeeForm from "@/components/EditEmployeeForm.vue";
 import DeleteCustomerModal from "@/components/DeleteCustomerModal.vue";
 
 export default {
   components: {
     CustomerOverview,
-    CreateCustomerForm,
-    EditCustomerForm,
+    CreateEmployeeForm,
+    EditEmployeeForm,
     DeleteCustomerModal,
   },
   data() {
@@ -162,13 +147,13 @@ export default {
           label: "Numero de placa",
           sortable: false,
         },
-        "actions",
+        "acciones",
       ],
       items: [],
       numberOfCustomers: 0,
       activeCustomers: 0,
       activeCustomersData: [],
-      customerId: 0,
+      employeeId: 0,
       companySearchTerm: "",
       tableHeader: "",
       showSuccessAlert: false,
@@ -203,7 +188,7 @@ export default {
     },
     getRowData(id) {
       this.$refs["edit-customer-modal"].show();
-      this.customerId = id;
+      this.employeeId = id;
     },
     closeEditModal() {
       this.$refs["edit-customer-modal"].hide();
@@ -226,7 +211,7 @@ export default {
     },
     showDeleteModal(id) {
       this.$refs["delete-customer-modal"].show();
-      this.customerId = id;
+      this.employeeId = id;
     },
     closeDeleteModal() {
       this.$refs["delete-customer-modal"].hide();

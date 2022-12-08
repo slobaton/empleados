@@ -66,11 +66,10 @@
         </b-form-group>
       </b-col>
     </b-row>
-
     <b-row class="mt-4">
       <b-col>
-        <b-button variant="primary" class="px-5" @click="addNewEmployee">Crear empleado</b-button>
-        <b-button variant="warning" @click="triggerClose" >Cerrar</b-button>
+        <b-button variant="primary" class="px-5" @click="updateEmployee">Actualizar empleado</b-button>
+        <b-button variant="warning" @click="triggerClose">Cerrar</b-button>
       </b-col>
     </b-row>
   </b-form>
@@ -80,25 +79,43 @@
 import axios from "axios";
 
 export default {
-  name: "CreateEmployeeModal",
+  name: "EditEmployeeModal",
+  props: {
+    employeeId: Number,
+  },
   data() {
     return {
       employee: {
-        vehicle: {
-        }
-      }
+        vehicle: {}
+      },
     };
+  },
+  mounted() {
+    this.getEmployeeByID();
   },
   methods: {
     triggerClose() {
-      this.$emit("closeCreateModal");
+      this.$emit("closeEditModal");
     },
-    addNewEmployee() {
+    getEmployeeByID() {
       axios
-        .post("http://localhost:3000/employees/", this.employee)
+        .get(`http://localhost:3000/employees/${this.employeeId}`)
+        .then((response) => {
+          this.employee = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    updateEmployee() {
+      axios
+        .put(
+          `http://localhost:3000/employees/${this.employeeId}`,
+          this.employee
+        )
         .then((response) => {
           console.log(response.data);
-          this.$emit("closeCreateModal");
+          this.$emit("closeEditModal");
           this.$emit("reloadDataTable");
           this.$emit("showSuccessAlert");
         })
