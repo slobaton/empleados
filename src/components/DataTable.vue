@@ -26,9 +26,10 @@
               </b-col>
               <b-col>
                 <b-button
-                  variant="dark"
+                  variant="primary"
                   id="show-btn"
                   @click="clearFilter"
+                  :disabled="!searchText"
                 >
                   <b-icon-x class="text-white"></b-icon-x>
                 </b-button>
@@ -36,6 +37,7 @@
                   variant="secondary"
                   id="show-btn"
                   @click="filterByName"
+                  :disabled="!searchText"
                 >
                   <b-icon-search class="text-white"></b-icon-search>
                 </b-button>
