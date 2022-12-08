@@ -89,6 +89,16 @@
       "fullname": "JUAN ZAPATA",
       "department": "produccion",
       "id": 9
+    },
+    {
+      "vehicle": {
+        "type": "automovil",
+        "color": "ROJO",
+        "licensePlate": "ASDF D"
+      },
+      "fullname": "Daniela Lobaton",
+      "department": "finanzas",
+      "id": 10
     }
   ]
 }

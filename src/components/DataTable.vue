@@ -54,6 +54,16 @@
               </b-col>
             </b-row>
           </b-col>
+          <b-col class="mt-3">
+            <b-row>
+              <b-form-checkbox v-model="checkedMoto" name="check-button" switch @change="check('moto')">
+                Motocicleta
+              </b-form-checkbox>
+              <b-form-checkbox v-model="checkedCar" name="check-button" switch @change="check('automovil')">
+                Automóvil
+              </b-form-checkbox>
+            </b-row>
+          </b-col>
         </b-row>
         <b-row class="mt-3">
           <b-table
@@ -177,13 +187,63 @@ export default {
       tableHeader: "",
       showSuccessAlert: false,
       alertMessage: "",
-      searchText: ""
+      searchText: "",
+      checkedMoto: true,
+      checkedCar: true,
     };
   },
   mounted() {
     this.getEmployeeData();
   },
   methods: {
+    check(type) {
+      console.log(type == 'moto');
+      console.log(this.checkedMoto);
+      switch (type) {
+        case 'moto':
+            if (!this.checkedMoto) {
+              const filterByMoto = this.items.filter(
+                item => item.vehicle.type.toLowerCase() != type.toLowerCase()
+              );
+              this.items = filterByMoto;
+            } else {
+              this.getFilterData();
+            }
+          break;
+          case 'automovil':
+            if (!this.checkedCar) {
+              const filterByCar = this.items.filter(
+                item => item.vehicle.type.toLowerCase() != type.toLowerCase()
+              );
+              this.items = filterByCar;
+            } else {
+              this.getFilterData();
+            }
+          break;
+      }
+
+    },
+    getFilterData() {
+      axios
+        .get("http://localhost:3000/employees/")
+        .then((response) => {
+          const items = response.data;
+          const filterByVehicle = items.filter(item => {
+            if (!this.checkedCar) {
+              return item.vehicle.type.toLowerCase() != 'automovil'
+            }
+
+            if (!this.checkedMoto) {
+              return item.vehicle.type.toLowerCase() != 'moto'
+            }
+            return item;
+          });
+          this.items = filterByVehicle;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     showCreateModal() {
       this.$refs["create-employee-modal"].show();
     },
